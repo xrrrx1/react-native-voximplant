@@ -234,7 +234,7 @@ function VoxImplantSDK () {
   };
     /**
      * Set video display mode. Applies to both incoming and outgoing stream. IOS ONLY
-     * @param {string} mode - Resize mode
+     * @param {VideoResizeMode} mode - Resize mode
      */
   this.setVideoResizeMode = function(mode) {
     VoxImplantModule.setVideoResizeMode(mode);
@@ -256,7 +256,7 @@ function VoxImplantSDK () {
   };
     /**
      * Switch camera
-     * @param {string} cameraName - Must be "front" or "back"
+     * @param {CameraType} cameraName - Must be "front" or "back"
      */
   this.switchToCamera = function(cameraName) {
     VoxImplantModule.switchToCamera(cameraName);
@@ -292,7 +292,7 @@ function VoxImplantSDK () {
         LoginSuccessful: "LoginSuccessful",
         /**
          * Invoked when login process failed
-         * @property {string} reason - Failure reason
+         * @property {number} errorCode - Login error code, possible values are: <table><thead><tr><th> code </th><th> description </th></tr></thead><tbody><tr><td> 401  </td><td> invalid password or token </td></tr><tr><td> 403  </td><td> account frozen </td></tr><tr><td> 404  </td><td> invalid username </td></tr><tr><td> 500  </td><td> internal error </td></tr><tr><td> 701  </td><td> token expired </td></tr></tbody></table>
          */
         LoginFailed: "LoginFailed",
         /**
