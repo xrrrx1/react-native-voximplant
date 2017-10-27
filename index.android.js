@@ -61,7 +61,7 @@ var VoxImplantModule = NativeModules.VoxImplantModule;
 function VoxImplantSDK () {
     /**
      * Initialization VoxImplant SDK
-     * @param options
+     * @param {VoxImplantClientConfig} options
      */
   this.init = function(options) {
     if (!options) options = {};
@@ -78,7 +78,7 @@ function VoxImplantSDK () {
   };
     /**
      * Connect to VoxImplant cloud
-     * @param options
+     * @param {VoxImplantConnect} options
      */
   this.connect = function(options) {
       if (!options) options = {};
@@ -88,7 +88,7 @@ function VoxImplantSDK () {
       VoxImplantModule.connect(options.connectivityCheck, options.servers);
   };
     /**
-     *
+     * Create new call
      * @param to - SIP URI, username or phone number to make call to. Actual routing is then performed by VoxEngine scenario
      * @param video - Enable video support in call
      * @param customData - Optional custom data passed with call. Will be available in VoxEngine scenario
@@ -171,7 +171,7 @@ function VoxImplantSDK () {
     /**
      * Sends DTMF digit in specified call.
      * @param callId - id of previously created call
-     * @param digit - Digit can be 0-9 for 0-9, 10 for bin build_docs.sh build.gradle cdn_mock doc gradle gradle.properties gradlew gradlew.bat id_rsa node_modules output package.json print_template_input.js Readme.md sdkdemo settings.gradle tmp voximplantdemo voximplant-sdk yarn.lock and 11 for #
+     * @param digit - Digit can be 0-9 for 0-9, 10 for *
      */
   this.sendDTMF = function(callId, digit) {
     VoxImplantModule.sendDTMF(callId, digit);
@@ -263,21 +263,21 @@ function VoxImplantSDK () {
   };
     /**
      * Register for push notifications. Application will receive push notifications from VoxImplant Server after first log in.
-     * @param pushRegistrationToken - FCM registration token that can be retrieved by calling FirebaseInstanceID.getToken()
+     * @param pushRegistrationToken - Push registration token
      */
   this.registerForPushNotifications = function(pushRegistrationToken) {
     VoxImplantModule.registerForPushNotifications(pushRegistrationToken);
   };
     /**
      * Unregister from push notifications. Application will no longer receive push notifications from VoxImplant server
-     * @param pushRegistrationToken - FCM registration token that was used to register for push notifications
+     * @param pushRegistrationToken - Push registration token that was used to register for push notifications
      */
   this.unregisterFromPushNotifications = function(pushRegistrationToken) {
     VoxImplantModule.unregisterFromPushNotifications(pushRegistrationToken);
   };
     /**
      * Handle incoming push notification
-     * @param notification - Incoming push notification that comes from FirebaseMessagingService.onMessageReceived(RemoteMessage remoteMessage)
+     * @param notification - Incoming push notification
      */
   this.handlePushNotification = function(notification) {
     VoxImplantModule.handlePushNotification(notification);
@@ -319,6 +319,13 @@ function VoxImplantSDK () {
          * @property headers - Optional headers passed with event
          */
         CallConnected: "CallConnected",
+        /**
+         * Call terminated
+         * @property callId - id of call
+         * @property headers - Optional headers passed with event
+         * @property answeredElsewhere - Indicate if the call was answered on other peer
+         */
+        CallDisconnected: "CallDisconnected",
         /**
          * Call ringing. You should start playing call progress tone now
          * @property callId - id of call
@@ -428,7 +435,28 @@ function VoxImplantSDK () {
          * Trace log level
          */
         LogLevelTrace: "trace"
-    }
+    };
+    /**
+     * @property enableVideo - Enable video functionality. Set to true by default.
+     * @property enableHWAcceleration - Enable hardware video acceleration. Set to true by default. Should be set to false, if provideLocalFramesInByteBuffers is set to true.
+     * @property provideLocalFramesInByteBuffers - Request video frames from camera in I420 format with byte buffers. Set to false by default.
+     Should be used only in case of custom implementation of video renderer (VideoRenderer.Callbacks class).
+     If set to true, VideoRenderer.Callbacks.renderFrame() will always provide the frames from camera in I420 format with byte buffers, and <i>enableHWAcceleration</i> should be set to false.
+     If set to false, video frames from camera will be provided in I420 format with textures.
+     * @property enableDebugLogging - Enable debug logging. Set to false by default.
+     * @type {{}}
+     */
+    this.VoxImplantClientConfig = {
+
+    };
+    /**
+     * @property connectivityCheck - Checks whether UDP traffic will flow correctly between device and VoxImplant cloud. This check reduces connection speed.
+     * @property servers - Server name of particular media gateway for connection.
+     * @type {{}}
+     */
+    this.VoxImplantConnect = {
+
+    };
 }
 
 module.exports = {
