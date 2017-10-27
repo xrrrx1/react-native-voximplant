@@ -78,7 +78,7 @@ function VoxImplantSDK () {
   };
     /**
      * Connect to VoxImplant cloud
-     * @param {VoxImplantConnect} options
+     * @param {VoxImplantConnectOptions} options
      */
   this.connect = function(options) {
       if (!options) options = {};
@@ -171,7 +171,7 @@ function VoxImplantSDK () {
     /**
      * Sends DTMF digit in specified call.
      * @param callId - id of previously created call
-     * @param digit - Digit can be 0-9 for 0-9, 10 for *
+     * @param digit - Digit can be 0-9 for 0-9, 10 for * and 11 for #
      */
   this.sendDTMF = function(callId, digit) {
     VoxImplantModule.sendDTMF(callId, digit);
@@ -233,7 +233,7 @@ function VoxImplantSDK () {
     VoxImplantModule.setUseLoudspeaker(useLoudSpeaker);
   };
     /**
-     * Set video display mode. Applies to both incoming and outgoing stream ( iOS only )
+     * Set video display mode. Applies to both incoming and outgoing stream. IOS ONLY
      * @param mode - Resize mode
      */
   this.setVideoResizeMode = function(mode) {
@@ -415,36 +415,33 @@ function VoxImplantSDK () {
         CameraTypeBack: "back"
     };
     /**
-     * Enum of log levels ( iOS only )
+     * Enum of log levels. IOS ONLY
      * @type {{LogLevelError: string, LogLevelInfo: string, LogLevelDebug: string, LogLevelTrace: string}}
      */
     this.LogLevel = {
         /**
-         * Error log level
+         * Log verbosity level, to include only error messages.
          */
         LogLevelError: "error",
         /**
-         * Info log level
+         * Default log verbosity level, to include informational messages.
          */
         LogLevelInfo: "info",
         /**
-         * Debug log level
+         * Log verbosity level to include debug messages.
          */
         LogLevelDebug: "debug",
         /**
-         * Trace log level
+         * Log verbosity level to include trace messages.
          */
         LogLevelTrace: "trace"
     };
     /**
-     * @property enableVideo - Enable video functionality. Set to true by default.
-     * @property enableHWAcceleration - Enable hardware video acceleration. Set to true by default. Should be set to false, if provideLocalFramesInByteBuffers is set to true.
-     * @property provideLocalFramesInByteBuffers - Request video frames from camera in I420 format with byte buffers. Set to false by default.
-     Should be used only in case of custom implementation of video renderer (VideoRenderer.Callbacks class).
-     If set to true, VideoRenderer.Callbacks.renderFrame() will always provide the frames from camera in I420 format with byte buffers, and <i>enableHWAcceleration</i> should be set to false.
-     If set to false, video frames from camera will be provided in I420 format with textures.
-     * @property enableDebugLogging - Enable debug logging. Set to false by default.
-     * @type {{}}
+     * @property enableVideo - Enable video functionality. Set to true by default. ANDROID ONLY
+     * @property enableHWAcceleration - Enable hardware video acceleration. Set to true by default. Should be set to false, if provideLocalFramesInByteBuffers is set to true. ANDROID ONLY
+     * @property provideLocalFramesInByteBuffers - Request video frames from camera in I420 format with byte buffers. Set to false by default. If set to false, video frames from camera will be provided in I420 format with textures. ANDROID ONLY
+     * @property enableDebugLogging - Enable debug logging. Set to false by default. ANDROID ONLY
+     * @property {LogLevel} logLevel - Log levels. IOS ONLY
      */
     this.VoxImplantClientConfig = {
 
@@ -452,9 +449,8 @@ function VoxImplantSDK () {
     /**
      * @property connectivityCheck - Checks whether UDP traffic will flow correctly between device and VoxImplant cloud. This check reduces connection speed.
      * @property servers - Server name of particular media gateway for connection.
-     * @type {{}}
      */
-    this.VoxImplantConnect = {
+    this.VoxImplantConnectOptions = {
 
     };
 }
