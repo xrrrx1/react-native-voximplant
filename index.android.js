@@ -282,7 +282,11 @@ function VoxImplantSDK () {
   this.handlePushNotification = function(notification) {
     VoxImplantModule.handlePushNotification(notification);
   };
-
+    /**
+     * List of events
+     * @type {{LoginSuccessful: string, LoginFailed: string, OneTimeKeyGenerated: string, ConnectionSuccessful: string, ConnectionClosed: string, ConnectionFailed: string, CallConnected: string, CallDisconnected: string, CallRinging: string, CallFailed: string, CallAudioStarted: string, IncomingCall: string, SIPInfoReceivedInCall: string, MessageReceivedInCall: string, NetStatsReceived: string, RefreshTokenSuccess: string, RefreshTokenFailed: string}}
+     * @namespace Events
+     */
     this.Events = {
         /**
          * Invoked when login process finished successfully.
@@ -388,7 +392,7 @@ function VoxImplantSDK () {
     };
     /**
      * Enum of supported video resize modes
-     * @type {{VideoResizeModeFit: string, VideoResizeModeClip: string}}
+     * @enum {string}
      */
     this.VideoResizeMode = {
         /**
@@ -402,7 +406,7 @@ function VoxImplantSDK () {
     };
     /**
      * Enum of supported camera type modes
-     * @type {{CameraTypeFront: string, CameraTypeBack: string}}
+     * @enum {string}
      */
     this.CameraType = {
         /**
@@ -416,7 +420,7 @@ function VoxImplantSDK () {
     };
     /**
      * Enum of log levels. IOS ONLY
-     * @type {{LogLevelError: string, LogLevelInfo: string, LogLevelDebug: string, LogLevelTrace: string}}
+     * @enum {string}
      */
     this.LogLevel = {
         /**
