@@ -61,7 +61,7 @@ var VoxImplantModule = NativeModules.VoxImplantModule;
 function VoxImplantSDK () {
     /**
      * Initialization VoxImplant SDK
-     * @param {VoxImplantClientConfig} options
+     * @param {VoxImplantClientConfig} Options
      */
   this.init = function(options) {
     if (!options) options = {};
@@ -78,7 +78,7 @@ function VoxImplantSDK () {
   };
     /**
      * Connect to VoxImplant cloud
-     * @param {VoxImplantConnectOptions} options
+     * @param {VoxImplantConnectOptions} Options
      */
   this.connect = function(options) {
       if (!options) options = {};
@@ -126,7 +126,7 @@ function VoxImplantSDK () {
     /**
      * Perform login using one time key that was generated before
      * @param {string} user - Full user name, including app and account name, like <i>someuser@someapp.youraccount.voximplant.com</i>
-     * @param {string} hash - Hash that was generated using following formula: MD5(oneTimeKey+"|"+MD5(user+":voximplant.com:"+password)). <b>Please note that here user is just a user name, without app name, account name or anything else after "@"</b>. So if you pass <i>myuser@myapp.myacc.voximplant.com</i> as a<b>username</b>, you should only use <i>myuser</i>  while computing this hash.
+     * @param {string} hash - Hash that was generated using following formula: MD5(oneTimeKey+"|"+MD5(user+":voximplant.com:"+password)). <b>Please note that here user is just a user name, without app name, account name or anything else after "@"</b>. So if you pass <i>myuser@myapp.myacc.voximplant.com</i> as a<b>username</b>, you should only use <i>myuser</i>  while computing this hash
      */
   this.loginUsingOneTimeKey = function(user, hash) {
     VoxImplantModule.loginUsingOneTimeKey(user, hash);
@@ -134,7 +134,7 @@ function VoxImplantSDK () {
     /**
      * Perform login using specified username and access token that was obtained in onLoginSuccessful callback before
      * @param {string} user - Full user name, including app and account name, like <i>someuser@someapp.youraccount.voximplant.com</i>
-     * @param {string} accessToken - access token that was obtained in onLoginSuccessful callback
+     * @param {string} accessToken - Access token that was obtained in onLoginSuccessful callback
      */
   this.loginUsingAccessToken = function(user, accessToken) {
     VoxImplantModule.loginUsingAccessToken(user, accessToken);
@@ -142,13 +142,13 @@ function VoxImplantSDK () {
     /**
      * Perform refresh of login tokens required for login using access token
      * @param {string} user - Full user name, including app and account name, like <i>someuser@someapp.youraccount.voximplant.com</i>
-     * @param {string} refreshToken - refresh token that was obtained in onLoginSuccessful callback
+     * @param {string} refreshToken - Refresh token that was obtained in onLoginSuccessful callback
      */
   this.refreshToken = function(user, refreshToken) {
     VoxImplantModule.refreshToken(user, refreshToken);
   };
     /**
-     * Generates one time login key to be used for automated login process.
+     * Generates one time login key to be used for automated login process
      * @param {string} user - Full user name, including app and account name, like <i>someuser@someapp.youraccount.voximplant.com</i>
      */
   this.requestOneTimeKey = function(user) {
@@ -162,15 +162,15 @@ function VoxImplantSDK () {
   };
     /**
      * Send start call request If call with specified id is not found - returns false
-     * @param {string} callId - id of previously created call
+     * @param {string} callId - Id of previously created call
      * @param {object} headers - Optional set of headers to be sent with message. Names must begin with "X-" to be processed by SDK
      */
   this.startCall = function(callId, headers) {
     VoxImplantModule.startCall(callId, headers == undefined ? {} :  headers);
   };
     /**
-     * Sends DTMF digit in specified call.
-     * @param {string} callId - id of previously created call
+     * Sends DTMF digit in specified call
+     * @param {string} callId - Id of previously created call
      * @param {number} digit - Digit can be 0-9 for 0-9, 10 for * and 11 for #
      */
   this.sendDTMF = function(callId, digit) {
@@ -178,7 +178,7 @@ function VoxImplantSDK () {
   };
     /**
      * Terminate specified call. Call must be either established, or outgoing progressing
-     * @param {string} callId - id of previously created call
+     * @param {string} callId - Id of previously created call
      * @param {object} headers - Optional set of headers to be sent with message. Names must begin with "X-" to be processed by Voximplant
      */
   this.disconnectCall = function(callId, headers) {
@@ -186,7 +186,7 @@ function VoxImplantSDK () {
   };
     /**
      * Reject incoming alerting call
-     * @param {string} callId - id of previously created call
+     * @param {string} callId - Id of previously created call
      * @param {object} headers - Optional set of headers to be sent with message. Names must begin with "X-" to be processed by SDK
      */
   this.declineCall = function(callId, headers) {
@@ -202,7 +202,7 @@ function VoxImplantSDK () {
   };
     /**
      * Sends instant message within established call
-     * @param {string} callId - id of previously created call
+     * @param {string} callId - Id of previously created call
      * @param {string} text - Message text
      */
   this.sendMessage = function(callId, text) {
@@ -210,7 +210,7 @@ function VoxImplantSDK () {
   };
     /**
      * Sends info within established call
-     * @param {string} callId - id of previously created call
+     * @param {string} callId - Id of previously created call
      * @param {string} mimeType - MIME type of info
      * @param {string} content - Custom string data
      * @param {object} headers - Optional set of headers to be sent with message. Names must begin with "X-" to be processed by SDK
@@ -248,8 +248,8 @@ function VoxImplantSDK () {
   };
     /**
      * Set local camera resolution
-     * @param {number} width - camera resolution width
-     * @param {number} height - camera resolution height
+     * @param {number} width - Camera resolution width
+     * @param {number} height - Camera resolution height
      */
   this.setCameraResolution = function(width, height) {
     VoxImplantModule.setCameraResolution(width, height);
@@ -262,7 +262,7 @@ function VoxImplantSDK () {
     VoxImplantModule.switchToCamera(cameraName);
   };
     /**
-     * Register for push notifications. Application will receive push notifications from VoxImplant Server after first log in.
+     * Register for push notifications. Application will receive push notifications from VoxImplant Server after first log in
      * @param {string} pushRegistrationToken - Push registration token
      */
   this.registerForPushNotifications = function(pushRegistrationToken) {
@@ -300,7 +300,7 @@ function VoxImplantSDK () {
          */
         LoginFailed: "LoginFailed",
         /**
-         * Returns one time key generated by the login server as a result of requestOneTimeLoginKey.
+         * Returns one time key generated by the login server as a result of requestOneTimeLoginKey
          * @property {string} key - One time key
          */
         OneTimeKeyGenerated: "OneTimeKeyGenerated",
@@ -319,26 +319,26 @@ function VoxImplantSDK () {
         ConnectionFailed: "ConnectionFailed",
         /**
          * Call established
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          * @property {object} headers - Optional headers passed with event
          */
         CallConnected: "CallConnected",
         /**
          * Call terminated
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          * @property {object} headers - Optional headers passed with event
          * @property {boolean} answeredElsewhere - Indicate if the call was answered on other peer
          */
         CallDisconnected: "CallDisconnected",
         /**
          * Call ringing. You should start playing call progress tone now
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          * @property {object} headers - Optional headers passed with event
          */
         CallRinging: "CallRinging",
         /**
          * Outgoing call failed
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          * @property {number} code - Status code
          * @property {string} reason - Status message
          * @property {object} headers - Optional headers passed with event
@@ -346,21 +346,21 @@ function VoxImplantSDK () {
         CallFailed: "CallFailed",
         /**
          * Call audio started. You should stop playing progress tone when event is received
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          */
         CallAudioStarted: "CallAudioStarted",
         /**
          * New incoming call received by SDK
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          * @property {string} from - SIP URI of caller
          * @property {string} displayName - Displayed name of caller
-         * @property {boolean} videoCall - video call flag
+         * @property {boolean} videoCall - Video call flag
          * @property {object} headers - Optional headers passed with event
          */
         IncomingCall: "IncomingCall",
         /**
          * SIP INFO received during a call
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          * @property {string} type - MIME type of info
          * @property {string} content - Body of info message
          * @property {object} headers - Optional headers passed with event
@@ -368,19 +368,19 @@ function VoxImplantSDK () {
         SIPInfoReceivedInCall: "SIPInfoReceivedInCall",
         /**
          * Instant message received during a call
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          * @property {string} text - Message text
          */
         MessageReceivedInCall: "MessageReceivedInCall",
         /**
          * Event dispatched when packet loss data received from VoxImplant servers
-         * @property {string} callId - id of call
+         * @property {string} callId - Id of call
          * @property {object} stats - NetworkInfo
          */
         NetStatsReceived:"NetStatsReceived",
         /**
          * Invoked when refresh of login tokens finished successfully
-         * @property {object} loginTokens - login tokens
+         * @property {object} loginTokens - Login tokens
          */
         RefreshTokenSuccess:"RefreshTokenSuccess",
         /**
@@ -396,11 +396,11 @@ function VoxImplantSDK () {
      */
     this.VideoResizeMode = {
         /**
-         * Video frame is scaled to be fit the size of the view by maintaining the aspect ratio (black borders may be displayed).
+         * Video frame is scaled to be fit the size of the view by maintaining the aspect ratio (black borders may be displayed)
          */
         VideoResizeModeFit: "fit",
         /**
-         * Video frame is scaled to fill the size of the view by maintaining the aspect ratio. Some portion of the video frame may be clipped.
+         * Video frame is scaled to fill the size of the view by maintaining the aspect ratio. Some portion of the video frame may be clipped
          */
         VideoResizeModeClip: "clip"
     };
@@ -410,11 +410,11 @@ function VoxImplantSDK () {
      */
     this.CameraType = {
         /**
-         * The facing of the camera is the same as that of the screen.
+         * The facing of the camera is the same as that of the screen
          */
         CameraTypeFront: "front",
         /**
-         * The facing of the camera is opposite to that of the screen.
+         * The facing of the camera is opposite to that of the screen
          */
         CameraTypeBack: "back"
     };
@@ -424,19 +424,19 @@ function VoxImplantSDK () {
      */
     this.LogLevel = {
         /**
-         * Log verbosity level, to include only error messages.
+         * Log verbosity level, to include only error messages
          */
         LogLevelError: "error",
         /**
-         * Default log verbosity level, to include informational messages.
+         * Default log verbosity level, to include informational messages
          */
         LogLevelInfo: "info",
         /**
-         * Log verbosity level to include debug messages.
+         * Log verbosity level to include debug messages
          */
         LogLevelDebug: "debug",
         /**
-         * Log verbosity level to include trace messages.
+         * Log verbosity level to include trace messages
          */
         LogLevelTrace: "trace"
     };
@@ -451,8 +451,8 @@ function VoxImplantSDK () {
 
     };
     /**
-     * @property {boolean} connectivityCheck - Checks whether UDP traffic will flow correctly between device and VoxImplant cloud. This check reduces connection speed.
-     * @property {array} servers - Server name of particular media gateway for connection.
+     * @property {boolean} connectivityCheck - Checks whether UDP traffic will flow correctly between device and VoxImplant cloud. This check reduces connection speed
+     * @property {array} servers - Server name of particular media gateway for connection
      */
     this.VoxImplantConnectOptions = {
 
